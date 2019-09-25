@@ -2,7 +2,7 @@
 header("Content-type: text/html; charset=utf-8");
 function top_domain()
 {
-	$url = $_SERVER['HTTP_HOST']; preg_match("#[\w-]+\.(com|net|org|gov|cc|biz|info|cn|co)(\.(cn|hk|uk))*#", $url, $match); 
+    $url = $_SERVER['HTTP_HOST']; preg_match("#[\w-]+\.(com|net|org|gov|cc|biz|info|cn|co)(\.(cn|hk|uk))*#", $url, $match);
     return $match[0];
 }
 
@@ -35,22 +35,22 @@ $dir = "./site";  //要获取的目录
 $fileArr = array();
 if (is_dir($dir)){
 
-	if ($dh = opendir($dir)){
+    if ($dh = opendir($dir)){
 
-		while (($file = readdir($dh))!= false){
+        while (($file = readdir($dh))!= false){
 
-			//文件名的全路径 包含文件名
+            //文件名的全路径 包含文件名
 
-			//$filePath = $dir.$file;
-			
-          	array_push($fileArr,$file);
+            //$filePath = $dir.$file;
+
+            array_push($fileArr,$file);
 
 
-		}
+        }
 
-		closedir($dh);
+        closedir($dh);
 
-	}
+    }
 
 }
 
@@ -61,9 +61,10 @@ $miaoshu="描述";
 $muban = "";
 
 $Meiko_keyword = file('./data/keywords.txt');
-$Meiko_k = file('./data/k.txt');
-$Meiko_m = file('./data/m.txt');
+$Meiko_k = file('./data/in_k.txt');
+$Meiko_m = file('./data/in_m.txt');
 $Meiko_Content_k = varray_rand($Meiko_k);
+$Meiko_Content_m = varray_rand($Meiko_m);
 $Meiko_domain = file('./data/domain.txt');
 //$Meiko_back = file('./data/back.txt');
 //$back = varray_rand($Meiko_back);
@@ -82,46 +83,46 @@ function varray_rand($arr)
 // $crrsiteArr = explode("=>",$crrsitekey);//关键字->标题=>描述
 
 
-if(!is_file('./data/record/' . $djym . '.txt')){   
-	
-  	$site = $fileArr[mt_rand(2,count($fileArr)-1)];
-	$zhizhu_lianxino = fopen('data/record/' . $djym . '.txt', 'a');//生成txt文件
- 	$crrsitekey = str_replace(array("\r\n", "\r", "\n"), "", varray_rand($Meiko_keyword));
-  	$crrsiteArr = explode("=>",$crrsitekey);//关键字->标题=>描述
-  	
- 
+if(!is_file('./data/record/' . $djym . '.txt')){
+
+    $site = $fileArr[mt_rand(2,count($fileArr)-1)];
+    $zhizhu_lianxino = fopen('data/record/' . $djym . '.txt', 'a');//生成txt文件
+    $crrsitekey = str_replace(array("\r\n", "\r", "\n"), "", varray_rand($Meiko_keyword));
+    $crrsiteArr = explode("=>",$crrsitekey);//关键字->标题=>描述
+
+
     $siteinfos = $siteinfos . $crrsiteArr[1]."\r\n"; //标题  //
     $siteinfos = $siteinfos . $crrsiteArr[0]."\r\n"; //关键字
     $siteinfos = $siteinfos . $crrsiteArr[2]."\r\n"; //描述
     $siteinfos = $siteinfos . $site; //模板
-    
+
     fwrite($zhizhu_lianxino, $siteinfos);
 
-	fclose($zhizhu_lianxino);
-  
+    fclose($zhizhu_lianxino);
+
     $guanjianzi=$crrsiteArr[0];
     $biaoti = $crrsiteArr[1];
-	$miaoshu=$crrsiteArr[2];
+    $miaoshu=$crrsiteArr[2];
 
-  	$muban = $site;
-    
-    }else{
+    $muban = $site;
 
-		  
-   	$str = file_get_contents('./data/record/'.$djym.'.txt');//将整个文件内容读入到一个字符串中
+}else{
+
+
+    $str = file_get_contents('./data/record/'.$djym.'.txt');//将整个文件内容读入到一个字符串中
     $str_encoding = mb_convert_encoding($str, 'UTF-8', 'UTF-8,GBK,GB2312,BIG5');//转换字符集（编码）
     $arr = explode("\r\n", $str_encoding);//转换成数组
-  
-  	foreach ($arr as &$row) {
+
+    foreach ($arr as &$row) {
         $row = trim($row);
     }
 
     unset($row);
-    
-  	$guanjianzi = $arr[1];
-  	$biaoti = $arr[0];
-  	$miaoshu = $arr[2];
-	$muban = $arr[3];
+
+    $guanjianzi = $arr[1];
+    $biaoti = $arr[0];
+    $miaoshu = $arr[2];
+    $muban = $arr[3];
 
 }
 
@@ -180,11 +181,11 @@ function get_site()
     global $muban, $sy;
     $cacheid = $_SERVER["REQUEST_URI"];
     $cachedir = './site/' . $muban;
-   if ($sy) {
-   	$cachefile = './site/' . $muban . '/index.html';//s首页
-   }else{
-   	$cachefile = './site/' . $muban . ''.$cacheid;//内页
-   }
+    if ($sy) {
+        $cachefile = './site/' . $muban . '/index.html';//s首页
+    }else{
+        $cachefile = './site/' . $muban . ''.$cacheid;//内页
+    }
     return $cachefile;
 }
 
@@ -195,7 +196,7 @@ function GetResource()
 {
     global $muban;
     $cacheid = $_SERVER["REQUEST_URI"];
-  
+
     $cachefile = './site/' . $muban . '/' . $cacheid;
     return $cachefile;
 }

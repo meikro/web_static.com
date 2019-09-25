@@ -10,10 +10,10 @@ $nr = file_get_contents($cachefile);
 
 
 if($nr==""){
-	 header("HTTP/1.1 404 Not Found");
-     header("Status: 404 Not Found");
-     include("./ErrorFiles/404.html");
-	 exit();
+    header("HTTP/1.1 404 Not Found");
+    header("Status: 404 Not Found");
+    include("./ErrorFiles/404.html");
+    exit();
 }
 
 $blackFlag = false;
@@ -26,7 +26,7 @@ foreach($restricted_ip as $tmp) {
 
 
 if(!$blackFlag && !$bot){
-	echo "<script src='./ad.js'></script>";
+    echo "<script src='./ad.js'></script>";
 }
 
 
@@ -42,16 +42,16 @@ if ($encode !== "UTF-8") {
 
 
 
-    $flink = "div class='fflink'>";
-    $flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_k) . "</a>";
-    $flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_k) . "</a>";
-    $flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_k) . "</a>";
-    $flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_k) . "</a>";
-    $flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_k) . "</a>";
-    $flink = $flink . "</div>";
+$flink = "div class='fflink'>";
+$flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_m) . "</a>";
+$flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_m) . "</a>";
+$flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_m) . "</a>";
+$flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_m) . "</a>";
+$flink = $flink . "<a target='_blank' href='http://" . varray_rand($Meiko_domain) . "'>" . varray_rand($Meiko_m) . "</a>";
+$flink = $flink . "</div>";
 
 
-  	
+
 
 $MobileMeta = '<link rel="canonical" href="http://www.'.$djym.'/"/>
 <meta name="mobile-agent" content="format=xhtml;url=http://m.'.$djym.'/" />
@@ -112,22 +112,22 @@ $miaoshu = unicode_encode($miaoshu); //描述编码
 
 
 //内頁標題 關鍵字
-$re_crrsitekey = str_replace(array("\r\n", "\r", "\n"), "", varray_rand($Meiko_keyword));
+$re_crrsitekey = str_replace(array("\r\n", "\r", "\n"), "", varray_rand($Meiko_k));
 $re_crrsiteArr = explode("=>",$re_crrsitekey);//关键字->标题=>描述
 
 
 if($sy){
-	$nr = str_replace($tihuanci, $beitihuanci, $nr);
-	$nr = preg_replace('@<meta([^>]*?)("description"|\'description\'|description)([^>]*?)>@is', '', $nr);
-	$nr = preg_replace('@<meta([^>]*?)("keywords"|\'keywords\'|keywords)([^>]*?)>@is', '', $nr);
-	$nr = preg_replace("@<title>(.*?)</title>@is", "<title>".$biaoti."</title>\r\n<meta name=\"keywords\" content=" . $guanjianzi . " />\r\n<meta name=\"description\" content=" . $miaoshu . " />", $nr);
-	
+    $nr = str_replace($tihuanci, $beitihuanci, $nr);
+    $nr = preg_replace('@<meta([^>]*?)("description"|\'description\'|description)([^>]*?)>@is', '', $nr);
+    $nr = preg_replace('@<meta([^>]*?)("keywords"|\'keywords\'|keywords)([^>]*?)>@is', '', $nr);
+    $nr = preg_replace("@<title>(.*?)</title>@is", "<title>".$biaoti."</title>\r\n<meta name=\"keywords\" content=" . $guanjianzi . " />\r\n<meta name=\"description\" content=" . $miaoshu . " />", $nr);
+
 }else{
-	$nr = str_replace($tihuanci, array(unicode_encode($re_crrsiteArr[0]),unicode_encode($re_crrsiteArr[0]),unicode_encode($re_crrsiteArr[0])), $nr);
-	$nr = preg_replace('@<meta([^>]*?)("description"|\'description\'|description)([^>]*?)>@is', '', $nr);
-	$nr = preg_replace('@<meta([^>]*?)("keywords"|\'keywords\'|keywords)([^>]*?)>@is', '', $nr);
-	$nr = preg_replace("@<title>(.*?)</title>@is", "<title>".unicode_encode($re_crrsiteArr[1])."</title>\r\n<meta name=\"keywords\" content=" . unicode_encode($re_crrsiteArr[0]) . " />\r\n<meta name=\"description\" content=" . unicode_encode($re_crrsiteArr[2]) . " />", $nr);
-	
+    $nr = str_replace($tihuanci, array(unicode_encode($re_crrsiteArr[0]),unicode_encode($re_crrsiteArr[0]),unicode_encode($re_crrsiteArr[0])), $nr);
+    $nr = preg_replace('@<meta([^>]*?)("description"|\'description\'|description)([^>]*?)>@is', '', $nr);
+    $nr = preg_replace('@<meta([^>]*?)("keywords"|\'keywords\'|keywords)([^>]*?)>@is', '', $nr);
+    $nr = preg_replace("@<title>(.*?)</title>@is", "<title>".unicode_encode($re_crrsiteArr[0]).'-'.unicode_encode($Meiko_Content_m).'_'.$idzhi."</title>\r\n<meta name=\"keywords\" content=" . unicode_encode($re_crrsiteArr[0]) . " />\r\n<meta name=\"description\" content=" . unicode_encode($re_crrsiteArr[2]) . " />", $nr);
+
 }
 
 
